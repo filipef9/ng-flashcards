@@ -1,0 +1,23 @@
+{
+    "editor.autoIndent": "full",
+    "editor.codeLens": false,
+    "editor.cursorBlinking": "solid",
+    "editor.cursorSmoothCaretAnimation": true,
+    "editor.cursorStyle": "line",
+    "editor.fontLigatures": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": false,
+    "editor.formatOnSave": true,
+    "editor.minimap.enabled": false,
+    "editor.tabSize": 2,
+    "editor.fontFamily": "'JetBrains Mono', 'Fira Code Retina', Consolas, monospace",
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+    },
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "stylelint.enable": true,
+    "tslint.autoFixOnSave": true,
+    "vsicons.dontShowNewVersionMessage": true,
+    "workbench.iconTheme": "vscode-icons",
+}
+
