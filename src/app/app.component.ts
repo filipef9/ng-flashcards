@@ -12,6 +12,9 @@ const getRandomNumber = () => {
 })
 export class AppComponent {
 
+  editing = false;
+  editingId: number;
+
   flashs: IFlash[] = [
     {
       question: 'Question 1',
@@ -38,13 +41,23 @@ export class AppComponent {
   }
 
   handleToggleCard(id: number): void {
-    const flash = this.flashs.find((f: IFlash) => f.id === id);
+    const flash = this.getFlashById(id);
     flash.show = !flash.show;
   }
 
-  handleRememberedChange({id, flag}): void {
-    const flash = this.flashs.find((f: IFlash) => f.id === id);
+  handleRememberedChange({ id, flag }): void {
+    const flash = this.getFlashById(id);
     flash.remembered = flag;
+  }
+
+  handleEdit(id: number): void {
+    this.editing = true;
+    this.editingId = id;
+    // TODO: We will add editing logic after adding the form.
+  }
+
+  private getFlashById(id: number): IFlash {
+    return this.flashs.find((flash: IFlash) => flash.id === id);
   }
 
 }

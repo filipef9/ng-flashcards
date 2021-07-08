@@ -22,6 +22,9 @@ export class FlashComponent implements OnInit {
   @Output()
   onRememberedChange = new EventEmitter();
 
+  @Output()
+  onEdit = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
@@ -43,6 +46,10 @@ export class FlashComponent implements OnInit {
       id: this.flash.id,
       flag: 'incorrect'
     });
+  }
+
+  editFlash(): void {
+    this.onEdit.emit(this.flash.id);
   }
 
 }
