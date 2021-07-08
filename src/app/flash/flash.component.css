@@ -12,6 +12,10 @@
   background: #51be51;
 }
 
+.card-header.incorrect {
+  background: #f00;
+}
+
 .correct .card-header-title,
 .incorrect .card-header-title {
   color: white;

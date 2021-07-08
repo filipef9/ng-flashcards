@@ -38,4 +38,11 @@ export class FlashComponent implements OnInit {
     });
   }
 
+  markIncorrect(): void {
+    this.onRememberedChange.emit({
+      id: this.flash.id,
+      flag: 'incorrect'
+    });
+  }
+
 }
