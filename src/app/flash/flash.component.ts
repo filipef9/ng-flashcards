@@ -19,6 +19,9 @@ export class FlashComponent implements OnInit {
   @Output()
   onToggleCard = new EventEmitter();
 
+  @Output()
+  onRememberedChange = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
@@ -26,6 +29,13 @@ export class FlashComponent implements OnInit {
 
   toggleCard(): void {
     this.onToggleCard.emit(this.flash.id);
+  }
+
+  markCorrect(): void {
+    this.onRememberedChange.emit({
+      id: this.flash.id,
+      flag: 'correct'
+    });
   }
 
 }

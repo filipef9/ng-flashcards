@@ -7,3 +7,12 @@
 .card-header {
   cursor: pointer;
 }
+
+.card-header.correct {
+  background: #51be51;
+}
+
+.correct .card-header-title,
+.incorrect .card-header-title {
+  color: white;
+}

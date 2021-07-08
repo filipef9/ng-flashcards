@@ -42,4 +42,9 @@ export class AppComponent {
     flash.show = !flash.show;
   }
 
+  handleRememberedChange({id, flag}): void {
+    const flash = this.flashs.find((f: IFlash) => f.id === id);
+    flash.remembered = flag;
+  }
+
 }
