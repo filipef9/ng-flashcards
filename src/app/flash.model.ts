@@ -2,6 +2,6 @@ export interface IFlash {
  question: string;
  answer: string;
  show: boolean;
- id: number;
+ id?: number;
  remembered?: 'correct' | 'incorrect';
 }

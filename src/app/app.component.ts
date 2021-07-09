@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { IFlash } from './flash.model';
 
 const getRandomNumber = () => {
@@ -12,8 +13,17 @@ const getRandomNumber = () => {
 })
 export class AppComponent {
 
+  @ViewChild('flasForm', {static: true})
+  flashForm: NgForm;
+
   editing = false;
   editingId: number;
+
+  flash = {
+    question: '',
+    answer: '',
+    show: false
+  } as IFlash;
 
   flashs: IFlash[] = [
     {
@@ -40,6 +50,29 @@ export class AppComponent {
     return flash.id;
   }
 
+  handleSubmit(): void {
+    this.flashs.push({
+      id: getRandomNumber(),
+      ...this.flash
+    });
+    this.handleClear();
+  }
+
+  handleClear(): void {
+    this.flash = {
+      question: '',
+      answer: '',
+      show: false
+    };
+    this.flashForm.reset();
+  }
+
+  handleCancel(): void {
+    this.editing = false;
+    this.editingId = undefined;
+    this.handleClear();
+  }
+
   handleToggleCard(id: number): void {
     const flash = this.getFlashById(id);
     flash.show = !flash.show;
@@ -53,7 +86,15 @@ export class AppComponent {
   handleEdit(id: number): void {
     this.editing = true;
     this.editingId = id;
-    // TODO: We will add editing logic after adding the form.
+    const flashToUpdate = this.flashs.find((flash: IFlash) => flash.id === id);
+    this.flash = flashToUpdate;
+  }
+
+  handleUpdate(): void {
+    const flashToUpdate = this.flashs.find((flash: IFlash) => flash.id === this.editingId);
+    flashToUpdate.question = this.flash.question;
+    flashToUpdate.answer = this.flash.answer;
+    this.handleCancel();
   }
 
   handleDelete(id: number): void {
