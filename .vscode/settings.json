@@ -19,5 +19,6 @@
     "tslint.autoFixOnSave": true,
     "vsicons.dontShowNewVersionMessage": true,
     "workbench.iconTheme": "vscode-icons",
+    "typescript.tsdk": "node_modules/typescript/lib",
 }
 
