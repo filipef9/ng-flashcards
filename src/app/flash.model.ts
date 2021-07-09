@@ -1,4 +1,4 @@
-export type IFlash = {
+export interface IFlash {
  question: string;
  answer: string;
  show: boolean;

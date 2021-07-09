@@ -25,6 +25,9 @@ export class FlashComponent implements OnInit {
   @Output()
   onEdit = new EventEmitter();
 
+  @Output()
+  onDelete = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
@@ -50,6 +53,10 @@ export class FlashComponent implements OnInit {
 
   editFlash(): void {
     this.onEdit.emit(this.flash.id);
+  }
+
+  deleteFlash(): void {
+    this.onDelete.emit(this.flash.id);
   }
 
 }

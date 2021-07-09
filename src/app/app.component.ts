@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IFlash } from './flash.model';
 
 const getRandomNumber = () => {
@@ -56,8 +56,19 @@ export class AppComponent {
     // TODO: We will add editing logic after adding the form.
   }
 
+  handleDelete(id: number): void {
+    const flashIndex = this.getFlashIndexById(id);
+    this.flashs.splice(flashIndex, 1);
+  }
+
   private getFlashById(id: number): IFlash {
     return this.flashs.find((flash: IFlash) => flash.id === id);
+  }
+
+  private getFlashIndexById(id: number): number {
+    return this.flashs
+      .map((flash: IFlash) => flash.id)
+      .indexOf(id);
   }
 
 }
