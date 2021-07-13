@@ -73,10 +73,18 @@ export class FlashService {
   }
 
   toggleFlash(id: number): void {
-    const flashToToggle = this.findFlashById(id);
-    if (flashToToggle) {
-      flashToToggle.show = !flashToToggle.show;
-    }
+    const flashToToggleIndex = this.flashs.findIndex((flash: IFlash) => flash.id === id);
+
+    this.flashs = [
+      ...this.flashs.slice(0, flashToToggleIndex),
+      {
+        ...this.flashs[flashToToggleIndex],
+        show: !this.flashs[flashToToggleIndex].show
+      },
+      ...this.flashs.slice(flashToToggleIndex + 1)
+    ];
+
+    this._flashs$.next(this.flashs);
   }
 
   rememberedChange(id: number, flag: 'correct' | 'incorrect'): void {
