@@ -92,10 +92,16 @@ export class FlashService {
   }
 
   rememberedChange(id: number, flag: 'correct' | 'incorrect'): void {
-    const flashToChange = this.findFlashById(id);
-    if (flashToChange) {
-      flashToChange.remembered = flag;
-    }
+    const flashToChangeIndex = this.flashs.findIndex((flash: IFlash) => flash.id === id);
+    this.flashs = [
+      ...this.flashs.slice(0, flashToChangeIndex),
+      {
+        ...this.flashs[flashToChangeIndex],
+        remembered: flag
+      },
+      ...this.flashs.slice(flashToChangeIndex + 1)
+    ];
+    this._flashs$.next(this.flashs);
   }
 
   findFlashById(id: number): IFlash {
