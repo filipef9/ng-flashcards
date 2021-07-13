@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { IFlash } from './flash.model';
 
 @Injectable({
@@ -6,10 +7,11 @@ import { IFlash } from './flash.model';
 })
 export class FlashService {
 
-  private _flashs: IFlash[];
+  private flashs: IFlash[];
+  private _flashs$: BehaviorSubject<IFlash[]>;
 
   constructor() {
-    this._flashs = [
+    this.flashs = [
       {
         question: 'Question 1',
         answer: 'Answer 1',
@@ -29,10 +31,12 @@ export class FlashService {
         id: this.getRandomNumber()
       }
     ];
+
+    this._flashs$ = new BehaviorSubject<IFlash[]>(this.flashs);
   }
 
-  get flashs(): IFlash[] {
-    return this._flashs;
+  get flashs$(): BehaviorSubject<IFlash[]> {
+    return this._flashs$;
   }
 
   getRandomNumber(): number {
@@ -40,19 +44,24 @@ export class FlashService {
   }
 
   addFlash({ question, answer }: IFlash): void {
-    this._flashs.push({
-      id: this.getRandomNumber(),
-      show: false,
-      question,
-      answer
-    });
+    this.flashs = [
+      ...this.flashs,
+      {
+        id: this.getRandomNumber(),
+        show: false,
+        question,
+        answer
+      }
+    ];
+
+    this._flashs$.next(this.flashs);
   }
 
   deleteFlash(id: number): void {
-    const flashIndexToDelete = this._flashs
+    const flashIndexToDelete = this.flashs
       .map((flash: IFlash) => flash.id)
       .indexOf(id);
-    this._flashs.splice(flashIndexToDelete, 1);
+    this.flashs.splice(flashIndexToDelete, 1);
   }
 
   updateFlash(id: number, { question, answer }: IFlash): void {
@@ -78,7 +87,7 @@ export class FlashService {
   }
 
   findFlashById(id: number): IFlash {
-    return this._flashs.find((flash: IFlash) => flash.id === id);
+    return this.flashs.find((flash: IFlash) => flash.id === id);
   }
 
 }
