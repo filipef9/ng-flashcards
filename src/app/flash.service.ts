@@ -58,10 +58,14 @@ export class FlashService {
   }
 
   deleteFlash(id: number): void {
-    const flashIndexToDelete = this.flashs
-      .map((flash: IFlash) => flash.id)
-      .indexOf(id);
-    this.flashs.splice(flashIndexToDelete, 1);
+    const flashToDeleteIndex = this.flashs.findIndex((flash: IFlash) => flash.id === id);
+
+    this.flashs = [
+      ...this.flashs.slice(0, flashToDeleteIndex),
+      ...this.flashs.slice(flashToDeleteIndex + 1)
+    ];
+
+    this._flashs$.next(this.flashs);
   }
 
   updateFlash(id: number, { question, answer }: IFlash): void {
