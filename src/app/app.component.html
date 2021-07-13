@@ -17,7 +17,7 @@
     </div>
   </div>
 
-  <button *ngIf="editing; else submitBtn" class="button is-primary" type="submit"
+  <button *ngIf="editing; else submitBtn" class="button is-primary" type="submit" (click)="handleUpdate()"
     [disabled]="flashForm.invalid">Update</button>
 
   <ng-template #submitBtn>

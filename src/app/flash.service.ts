@@ -69,11 +69,19 @@ export class FlashService {
   }
 
   updateFlash(id: number, { question, answer }: IFlash): void {
-    const flashToUpdate = this.findFlashById(id);
-    if (flashToUpdate) {
-      flashToUpdate.question = question;
-      flashToUpdate.answer = answer;
-    }
+    const flashToUpdateIndex = this.flashs.findIndex((flash: IFlash) => flash.id === id);
+
+    this.flashs = [
+      ...this.flashs.slice(0, flashToUpdateIndex),
+      {
+        ...this.flashs[flashToUpdateIndex],
+        question,
+        answer
+      },
+      ...this.flashs.slice(flashToUpdateIndex + 1)
+    ];
+
+    this._flashs$.next(this.flashs);
   }
 
   toggleFlash(id: number): void {

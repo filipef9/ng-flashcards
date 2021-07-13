@@ -1,10 +1,8 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { IFlash } from './flash.model';
 import { FlashService } from './flash.service';
-
-
 
 @Component({
   selector: 'app-root',
@@ -13,7 +11,7 @@ import { FlashService } from './flash.service';
 })
 export class AppComponent implements OnInit {
 
-  @ViewChild('flasForm', { static: true })
+  @ViewChild('flasForm', { static: false })
   flashForm: NgForm;
 
   editing = false;
@@ -67,7 +65,7 @@ export class AppComponent implements OnInit {
   }
 
   handleEdit(id: number): void {
-    this.flash = this.flashService.findFlashById(id);
+    this.flash = { ...this.flashService.findFlashById(id) };
     this.editing = true;
     this.editingId = id;
   }
