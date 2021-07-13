@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IFlash } from '../flash.model';
 
 @Component({
   selector: 'app-flash',
   templateUrl: './flash.component.html',
-  styleUrls: ['./flash.component.css']
+  styleUrls: ['./flash.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FlashComponent implements OnInit {
 
